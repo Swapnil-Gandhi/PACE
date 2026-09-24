@@ -8,7 +8,11 @@ serving. Built on the [Multiverse Engine](https://github.com/Multiverse4FM/Multi
 substrate), it decides at every decode step which forked branches advance — admitting an extra branch
 only when its predicted latency cost (its **branch externality**) fits the batch's current slack
 budget. The payoff: higher goodput than eager admission, while protecting the latency SLO of every
-co-batched request. For more information, please refer to our research paper: [<a href="https://arxiv.org/abs/2605.06914">📄 Regulating Branch Parallelism in LLM Serving </a>].
+co-batched request. For more information, please refer to our NeurIPS 2026 paper: [<a href="https://arxiv.org/abs/2605.06914">📄 Regulating Branch Parallelism in LLM Serving </a>].
+
+## 📰 News
+
+- **September 2026:** 🎉 PACE has been accepted to **NeurIPS 2026**!
 
 ## 🧠 How it works
 
@@ -71,13 +75,11 @@ model; heavy GPU correctness gates live in `test_pace_e2e.py` (run with `PACE_RU
 ## 📚 Citation
 
 ```bibtex
-@misc{gandhi2026,
-      title={Regulating Branch Parallelism in LLM Serving},
+@inproceedings{gandhi2026,
+      title={Regulating Branch Parallelism in {LLM} Serving},
       author={Gandhi, Swapnil and Hari, Siva and Dally, William J. and Kozyrakis, Christos},
+      booktitle={The Fortieth Annual Conference on Neural Information Processing Systems},
       year={2026},
-      eprint={2605.06914},
-      archivePrefix={arXiv},
-      primaryClass={cs.DC},
       url={https://arxiv.org/abs/2605.06914},
 }
 ```
