@@ -34,7 +34,11 @@ import time
 
 import sglang as sgl
 
-PROMPT_DIR = "/home/swgandhi/pace/multiverse-engine/example/prompt"
+# example/prompt at the repo root; set PACE_PROMPT_DIR to use other prompts.
+_HERE = os.path.dirname(os.path.abspath(__file__))
+PROMPT_DIR = os.environ.get(
+    "PACE_PROMPT_DIR", os.path.join(_HERE, "../../../../example/prompt")
+)
 BRANCH_STOP_TOKEN_IDS = [151670, 151674]
 SIMPLE_PROMPTS = [
     "What is the capital of France?",
@@ -322,6 +326,7 @@ def main():
     ap.add_argument("--max-new-tokens", type=int, default=1200)
     ap.add_argument("--slo-ms", type=float, default=50.0)
     ap.add_argument("--model", default="Multiverse4FM/Multiverse-32B")
+    ap.add_argument("--tp", type=int, default=8)
     ap.add_argument("--coeffs", default="/tmp/pace-env/pace_coeffs.json")
     ap.add_argument("--seed", type=int, default=0)
     # stability knobs (DESIGN.md §17: harden burst stability on H200)
@@ -339,7 +344,7 @@ def main():
 
     kw = dict(
         model_path=a.model,
-        tp_size=8,
+        tp_size=a.tp,
         dtype="bfloat16",
         disable_overlap_schedule=not a.overlap,  # v1 default = normal mode (DESIGN.md D4)
         log_level="info",

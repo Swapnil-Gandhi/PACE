@@ -34,7 +34,7 @@ on a later step.
 
 ```bash
 conda create -n pace python=3.11 && conda activate pace
-git clone https://github.com/Multiverse4FM/Multiverse-Engine && cd Multiverse-Engine
+git clone https://github.com/Swapnil-Gandhi/PACE && cd PACE
 bash install.sh
 # torch is pinned to 2.6.0 (cu124); if install.sh pulls newer transitive deps, pin these:
 pip install "transformers==4.51.1" "torchao==0.9.0" "compressed-tensors==0.9.4"

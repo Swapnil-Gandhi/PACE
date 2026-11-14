@@ -70,12 +70,13 @@ def main():
     for m in ms:
         print(f"  {m:6}", runs[m]["summary"].get("victim"))
 
-    for kind, label in [(None, "OVERALL"), ("serial", "SERIAL"), ("decomp", "DECOMP")]:
+    # the eval worker tags serial requests as "simple"
+    for kind, label in [(None, "OVERALL"), ("simple", "SERIAL"), ("decomp", "DECOMP")]:
         print(f"\n=== goodput tok/s vs SLO [{label}] ===")
         print("SLO  " + " ".join(f"{m:>9}" for m in ms))
         for slo in SLOS:
             print(f"{slo:>3}  " + " ".join(f"{goodput_attain(runs[m], slo, kind)[0]:>9.0f}" for m in ms))
-        print(f"--- SLO attainment %% vs SLO [{label}] ---")
+        print(f"--- SLO attainment % vs SLO [{label}] ---")
         for slo in SLOS:
             print(f"{slo:>3}  " + " ".join(f"{goodput_attain(runs[m], slo, kind)[1]*100:>9.1f}" for m in ms))
 

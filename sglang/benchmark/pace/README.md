@@ -24,7 +24,8 @@ HF_HOME=/path/to/hf COEFFS=./pace_coeffs.json OUT=/tmp/pace_sweep \
 Runs `_pace_eval_worker.py` once per mode (one process each for clean TP state), then prints the
 comparison via `analyze_sweep.py`. Per-request TPOTs are saved, so the SLO can be swept post-hoc.
 
-Env knobs: `MODES` (eager/pace/off/cap2/cap5), `CONCURRENCY`, `DECOMP_FRAC`, `MRR`
+Env knobs: `MODES` (eager/pace/off/cap2/cap5), `TP` (tensor-parallel size, default 8),
+`CONCURRENCY`, `DECOMP_FRAC`, `MRR`
 (max-running-requests), `DURATION`, `WARMUP`, `MNT` (max-new-tokens), `SLO`, `MEMFRAC`, `UTILITY`
 (linear/concave/priority).
 
