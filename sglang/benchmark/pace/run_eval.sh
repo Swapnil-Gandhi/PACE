@@ -10,7 +10,7 @@ REPO="$(cd "$HERE/../.." && pwd)"                       # .../sglang
 WORKER="$REPO/test/srt/pace/_pace_eval_worker.py"
 PY="${PY:-python}"
 : "${HF_HOME:?set HF_HOME to your model cache}"; export HF_HOME
-MODEL="${MODEL:-Multiverse4FM/Multiverse-32B}"
+MODEL="${MODEL:-Multiverse4FM/Multiverse-32B}"; TP="${TP:-8}"
 COEFFS="${COEFFS:-$HERE/pace_coeffs.json}"
 OUT="${OUT:-/tmp/pace_sweep}"; mkdir -p "$OUT"
 MODES="${MODES:-eager pace off cap2}"
@@ -23,7 +23,7 @@ for m in $MODES; do
   case "$m" in cap2) mode=cap; cap=2;; cap5) mode=cap; cap=5;; esac
   echo "=== running $m ==="
   PACE_CAP=$cap "$PY" "$WORKER" --mode "$mode" --out "$OUT/$m.json" \
-    --model "$MODEL" --load closed --concurrency "$CONCURRENCY" \
+    --model "$MODEL" --tp "$TP" --load closed --concurrency "$CONCURRENCY" \
     --max-running-requests "$MRR" --duration "$DURATION" --warmup "$WARMUP" \
     --decomp-frac "$DECOMP_FRAC" --max-new-tokens "$MNT" --slo-ms "$SLO" \
     --mem-fraction-static "$MEMFRAC" --pace-utility "$UTILITY" --coeffs "$COEFFS" \

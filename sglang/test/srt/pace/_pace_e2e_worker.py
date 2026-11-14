@@ -17,7 +17,11 @@ import os
 
 import sglang as sgl
 
-PROMPT_DIR = "/home/swgandhi/pace/multiverse-engine/example/prompt"
+# example/prompt at the repo root; set PACE_PROMPT_DIR to use other prompts.
+_HERE = os.path.dirname(os.path.abspath(__file__))
+PROMPT_DIR = os.environ.get(
+    "PACE_PROMPT_DIR", os.path.join(_HERE, "../../../../example/prompt")
+)
 # </Goal>, </Path> token ids for the Multiverse-32B tokenizer (from example.py).
 BRANCH_STOP_TOKEN_IDS = [151670, 151674]
 
